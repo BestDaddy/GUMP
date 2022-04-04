@@ -598,7 +598,9 @@ class GUMP
      */
     private function foreach_call_validator(string $rule, string $field, array $input, array $rule_params = [])
     {
-        $values = !is_array($input[$field]) ? [ $input[$field] ] : $input[$field];
+        // $values = !is_array($input[$field]) ? [ $input[$field] ] : $input[$field];
+        // @hamsin fix
+        $values = !is_array($input[$field]) || (is_array($input[$field]) && count($input[$field]) === 0) ? [$input[$field]] : $input[$field];
 
         foreach ($values as $value) {
             $result = $this->call_validator($rule, $field, $input, $rule_params, $value);
